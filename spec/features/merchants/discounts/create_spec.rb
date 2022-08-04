@@ -11,6 +11,10 @@ RSpec.describe 'Merchant Discounts Create' do
 
         click_button 'Create Bulk Discount'
 
-        expect(current_path).to eq(merchant_discount_path(merchant))
+        expect(current_path).to eq(merchant_discounts_path(merchant))
+
+        within "#discount-list" do
+            expect(page).to have_link("Threshold Quantity: 10, Discount: 50%")
+        end
     end
 end
