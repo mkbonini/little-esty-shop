@@ -584,4 +584,13 @@ RSpec.describe 'Merchant Dashboard' do
             expect(page).to have_content(invoice_1b_date)
         end
     end
+
+    it 'has a link to view all discounts' do
+        merchant_1 = Merchant.create!(name: 'Mike Dao')
+        visit "/merchants/#{merchant_1.id}/dashboard"
+
+        expect(page).to have_link("View All My Discounts")
+        click_on("View All My Discounts")
+        expect(current_path).to eq "/merchants/#{merchant_1.id}/discounts"
+    end
 end
