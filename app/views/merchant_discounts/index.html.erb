@@ -8,6 +8,6 @@
 
 <div id='discount-list'>
     <% @merchant.bulk_discounts.each do |discount| %>
-        <%= link_to("Threshold Quantity: #{discount.quantity}, Discount: #{discount.discount}%", merchant_discounts_path(@merchant, discount)) %><br>
+        <%= link_to("Threshold Quantity: #{discount.quantity}, Discount: #{discount.discount}%", merchant_discount_path(@merchant, discount)) %><br>
     <% end %>
 </div>
