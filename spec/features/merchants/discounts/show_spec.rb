@@ -24,6 +24,6 @@ RSpec.describe 'Merchant Discounts show page' do
 
         expect(page).to have_link("Edit Discount")
         click_on("Edit Discount")
-        expect(current_path).to eq(edit_merchant_discoutn_path(merchant, discount_1))
+        expect(current_path).to eq(edit_merchant_discount_path(merchant_1, discount_1))
     end
 end

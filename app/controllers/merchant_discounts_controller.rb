@@ -4,7 +4,7 @@ class MerchantDiscountsController < ApplicationController
     end
 
     def show
-        @discount = BulkDiscount.find(params[:id])
+        @facade = discount_objects
     end
     
     def new
@@ -24,6 +24,10 @@ class MerchantDiscountsController < ApplicationController
         end
     end
 
+    def edit
+      @facade = discount_objects
+    end
+
     def destroy
       @discount = BulkDiscount.delete(params[:id])
       redirect_to merchant_discounts_path(params[:merchant_id])
@@ -32,5 +36,10 @@ class MerchantDiscountsController < ApplicationController
     private
     def discount_params
       params.permit(:quantity, :discount)
+    end
+
+    def discount_objects
+      @discount = BulkDiscount.find(params[:id])
+      @merchant = Merchant.find(params[:merchant_id])
     end
 end
