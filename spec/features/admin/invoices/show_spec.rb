@@ -148,5 +148,26 @@ RSpec.describe 'Admin Invoices Show Page' do
       expect(page).to have_content("completed")
     end
   end
+
+  it 'shows total and discounted revenue' do
+    merchant = Merchant.create!(name: 'amazon')
+    customer = Customer.create!(first_name: 'Billy', last_name: 'Bob')
+    item_1 = Item.create!(name: 'pet rock', description: 'a rock you pet', unit_price: 10000, merchant_id: merchant.id)
+    item_2 = Item.create!(name: 'ferbie', description: 'monster toy', unit_price: 66600, merchant_id: merchant.id)
+    invoice_1 = Invoice.create!(status: 'completed', customer_id: customer.id)
+    discount_1 = BulkDiscount.create!(quantity: 10, discount: 0.20, merchant_id: merchant.id)
+    discount_2 = BulkDiscount.create!(quantity: 15, discount: 0.30, merchant_id: merchant.id)
+
+
+    InvoiceItem.create!(quantity: 11, unit_price: 100, status: 'shipped', item: item_1, invoice: invoice_1)
+    InvoiceItem.create!(quantity: 16, unit_price: 10, status: 'shipped', item: item_2, invoice: invoice_1)
+
+    visit admin_invoice_path(invoice_1)
+
+    within "#invoice-details" do
+        expect(page).to have_content("Total Revenue: $12.60")
+        expect(page).to have_content("Discounted Revenue: $9.92")
+    end
+end
 end
 
