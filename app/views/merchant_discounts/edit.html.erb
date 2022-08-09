@@ -1,0 +1,18 @@
+<h1>Edit Discount</h1>
+
+<% flash.each do |type, msg| %>
+    <div class='flash_red'><%= msg %></div>
+    <br>
+<% end %>
+
+<div id="update-form">
+  <%= form_with url: merchant_discount_path(@merchant, @discount), method: :patch, local: true do |form| %>
+      <%= form.label :quantity, "Threshold Quantity: " %>
+      <%= form.text_field :quantity, value: @discount.quantity %>
+
+      <%= form.label :discount, "Discount Percentage: " %>
+      <%= form.text_field :discount, value: @discount.discount %>
+
+      <%= form.submit "Update Discount" %>
+  <% end %>
+</div>
