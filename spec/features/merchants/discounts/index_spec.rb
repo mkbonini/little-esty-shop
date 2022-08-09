@@ -51,4 +51,16 @@ RSpec.describe 'Merchant Discounts Index page' do
             expect(page).to have_link("Delete Discount", count: 1)
         end
     end
+
+    it 'shows the next 3 upcoming holidays' do
+        merchant_1 = Merchant.create!(name: 'Mike Dao')
+        visit "/merchants/#{merchant_1.id}/discounts"
+
+        within '#holiday-list' do
+            expect(page).to have_content("Upcoming Holidays")
+            expect(page).to have_content("Labour Day - 09/05/2022")
+            expect(page).to have_content("Columbus Day - 10/10/2022")
+            expect(page).to have_content("Veterans Day - 11/11/2022")
+        end
+    end
 end
