@@ -4,9 +4,9 @@ RSpec.describe 'Merchant Discounts Index page' do
     it 'lists all discounts with with quantity threshold and discount' do
         merchant_1 = Merchant.create!(name: 'Mike Dao')
         merchant_2 = Merchant.create!(name: 'Mike Bonini')
-        discount_1 = BulkDiscount.create!(quantity: 10, discount: 20, merchant_id: merchant_1.id)
-        discount_2 = BulkDiscount.create!(quantity: 15, discount: 30, merchant_id: merchant_1.id)
-        discount_3 = BulkDiscount.create!(quantity: 20, discount: 40, merchant_id: merchant_2.id)
+        discount_1 = BulkDiscount.create!(quantity: 10, discount: 0.20, merchant_id: merchant_1.id)
+        discount_2 = BulkDiscount.create!(quantity: 15, discount: 0.30, merchant_id: merchant_1.id)
+        discount_3 = BulkDiscount.create!(quantity: 20, discount: 0.40, merchant_id: merchant_2.id)
 
         visit "/merchants/#{merchant_1.id}/discounts"
 
@@ -19,7 +19,7 @@ RSpec.describe 'Merchant Discounts Index page' do
 
     it 'each discount links to discount show page' do
         merchant_1 = Merchant.create!(name: 'Mike Dao')
-        discount_1 = BulkDiscount.create!(quantity: 10, discount: 20, merchant_id: merchant_1.id)
+        discount_1 = BulkDiscount.create!(quantity: 10, discount: 0.20, merchant_id: merchant_1.id)
 
         visit "/merchants/#{merchant_1.id}/discounts"
         click_on("Threshold Quantity: 10, Discount: 20%")
@@ -29,7 +29,7 @@ RSpec.describe 'Merchant Discounts Index page' do
 
     it 'has a link to create a new discount' do
         merchant_1 = Merchant.create!(name: 'Mike Dao')
-        discount_1 = BulkDiscount.create!(quantity: 10, discount: 20, merchant_id: merchant_1.id)
+        discount_1 = BulkDiscount.create!(quantity: 10, discount: 0.20, merchant_id: merchant_1.id)
 
         visit "/merchants/#{merchant_1.id}/discounts"
 
@@ -40,8 +40,8 @@ RSpec.describe 'Merchant Discounts Index page' do
 
     it 'has a link to delete a discount' do
         merchant_1 = Merchant.create!(name: 'Mike Dao')
-        discount_1 = BulkDiscount.create!(quantity: 10, discount: 20, merchant_id: merchant_1.id)
-        discount_2 = BulkDiscount.create!(quantity: 15, discount: 30, merchant_id: merchant_1.id)
+        discount_1 = BulkDiscount.create!(quantity: 10, discount: 0.20, merchant_id: merchant_1.id)
+        discount_2 = BulkDiscount.create!(quantity: 15, discount: 0.30, merchant_id: merchant_1.id)
 
         visit "/merchants/#{merchant_1.id}/discounts"
 
