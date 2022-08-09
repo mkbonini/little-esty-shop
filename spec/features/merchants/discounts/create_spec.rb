@@ -7,7 +7,7 @@ RSpec.describe 'Merchant Discounts Create' do
         visit "/merchants/#{merchant.id}/discounts/new"
 
         fill_in :quantity, with: "10"
-        fill_in :discount, with: "50"
+        fill_in :discount, with: "0.50"
 
         click_button 'Create Bulk Discount'
 

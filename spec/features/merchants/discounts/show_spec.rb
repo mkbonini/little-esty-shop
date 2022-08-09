@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Merchant Discounts show page' do
     it 'lists all discounts with with quantity threshold and discount' do
         merchant_1 = Merchant.create!(name: 'Mike Dao')
-        discount_1 = BulkDiscount.create!(quantity: 10, discount: 20, merchant_id: merchant_1.id)
-        discount_2 = BulkDiscount.create!(quantity: 15, discount: 30, merchant_id: merchant_1.id)
+        discount_1 = BulkDiscount.create!(quantity: 10, discount: 0.20, merchant_id: merchant_1.id)
+        discount_2 = BulkDiscount.create!(quantity: 15, discount: 0.30, merchant_id: merchant_1.id)
 
         visit "/merchants/#{merchant_1.id}/discounts/#{discount_1.id}"
 
@@ -17,8 +17,8 @@ RSpec.describe 'Merchant Discounts show page' do
 
     it 'has a link to edit discounts' do
         merchant_1 = Merchant.create!(name: 'Mike Dao')
-        discount_1 = BulkDiscount.create!(quantity: 10, discount: 20, merchant_id: merchant_1.id)
-        discount_2 = BulkDiscount.create!(quantity: 15, discount: 30, merchant_id: merchant_1.id)
+        discount_1 = BulkDiscount.create!(quantity: 10, discount: 0.20, merchant_id: merchant_1.id)
+        discount_2 = BulkDiscount.create!(quantity: 15, discount: 0.30, merchant_id: merchant_1.id)
 
         visit "/merchants/#{merchant_1.id}/discounts/#{discount_1.id}"
 
