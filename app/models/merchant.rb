@@ -43,6 +43,7 @@ class Merchant < ApplicationRecord
     get_invoice_items(invoice_id).sum("quantity * unit_price")
   end
 
+
   def self.enabled_merchants
     Merchant.where("status = ?", 1).order(:created_at)
   end
