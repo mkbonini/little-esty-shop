@@ -58,9 +58,9 @@ RSpec.describe 'Merchant Discounts Index page' do
 
         within '#holiday-list' do
             expect(page).to have_content("Upcoming Holidays")
-            expect(page).to have_content("Labour Day - 09/05/2022")
-            expect(page).to have_content("Columbus Day - 10/10/2022")
-            expect(page).to have_content("Veterans Day - 11/11/2022")
+            expect(page).to have_content("Labour Day - 2022-09-05")
+            expect(page).to have_content("Columbus Day - 2022-10-10")
+            expect(page).to have_content("Veterans Day - 2022-11-11")
         end
     end
 end

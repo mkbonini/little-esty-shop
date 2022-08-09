@@ -49,6 +49,10 @@ RSpec.configure do |config|
     json_response_pull_requests = File.read('spec/fixtures/repo_pull_requests.json')
     stub_request(:get, "https://api.github.com/repos/okayama-mayu/little-esty-shop/pulls?state=all").
         to_return(status: 200, body: json_response_pull_requests)
+
+    json_response_next_holiday = File.read('spec/fixtures/holidays.json')
+    stub_request(:get, "https://date.nager.at/api/v3/NextPublicHolidays/US").
+      to_return(status: 200, body: json_response_next_holiday)
   end
   
   # rspec-expectations config goes here. You can use an alternate
