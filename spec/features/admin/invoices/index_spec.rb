@@ -63,13 +63,6 @@ RSpec.describe 'Admin Merchants Invoices Index' do
                         invoice_id: @invoice_3.id)
   end
 
-  # User Story 32
-  # Admin Invoices Index Page
-
-  # As an admin,
-  # When I visit the admin Invoices index ("/admin/invoices")
-  # Then I see a list of all Invoice ids in the system
-  # Each id links to the admin invoice show page
   it 'has a list of all invoice IDs in the system with links to the admin invoice show page' do
     visit "/admin/invoices"
 

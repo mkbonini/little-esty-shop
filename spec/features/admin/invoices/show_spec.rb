@@ -57,16 +57,6 @@ RSpec.describe 'Admin Invoices Show Page' do
                                           invoice_id: @invoice_3.id)
   end
   
-  # User Story 33
-  # Admin Invoice Show Page
-
-  # As an admin,
-  # When I visit an admin invoice show page
-  # Then I see information related to that invoice including:
-  # - Invoice id
-  # - Invoice status
-  # - Invoice created_at date in the format "Monday, July 18, 2019"
-  # - Customer first and last name
   it 'shows all attributes related to an invoice' do
     visit "/admin/invoices/#{@invoice_1.id}"
 
@@ -77,17 +67,6 @@ RSpec.describe 'Admin Invoices Show Page' do
     expect(page).to have_content(@invoice_1.customer.last_name.titlecase)
   end
 
-  # User Story 34
-  # Admin Invoice Show Page: Invoice Item Information
-
-  # As an admin
-  # When I visit an admin invoice show page
-  # Then I see all of the items on the invoice including:
-
-  # Item name
-  # The quantity of the item ordered
-  # The price the Item sold for
-  # The Invoice Item status 
   it 'shows information for all of the invoice items on an invoice' do
     visit "/admin/invoices/#{@invoice_1.id}"
 
@@ -110,12 +89,6 @@ RSpec.describe 'Admin Invoices Show Page' do
     end
   end
   
-  # User Story 35
-  # Admin Invoice Show Page: Total Revenue
-
-  # As an admin
-  # When I visit an admin invoice show page
-  # Then I see the total revenue that will be generated from this invoice
   it 'shows the total revenue that will be generated for the invoice' do
     visit "/admin/invoices/#{@invoice_1.id}"
 
@@ -124,19 +97,6 @@ RSpec.describe 'Admin Invoices Show Page' do
     end
   end
 
-  # User Story 36
-  # Admin Invoice Show Page: Update Invoice Status
-
-  # As an admin
-  # When I visit an admin invoice show page
-  # I see the invoice status is a select field
-  # And I see that the invoice's current status is selected
-  # When I click this select field,
-  # Then I can select a new status for the Invoice,
-  # And next to the select field I see a button to "Update Invoice Status"
-  # When I click this button
-  # I am taken back to the admin invoice show page
-  # And I see that my Invoice's status has now been updated
   it 'has a select field for invoice status that can update the status and redirect the user' do
     visit "/admin/invoices/#{@invoice_1.id}"
 

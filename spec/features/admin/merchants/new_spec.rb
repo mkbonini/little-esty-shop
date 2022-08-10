@@ -1,10 +1,6 @@
 require 'rails_helper' 
 
 RSpec.describe 'form for new Merchant' do 
-    # When I fill out the form I click ‘Submit’
-    # Then I am taken back to the admin merchants index page
-    # And I see the merchant I just created displayed
-    # And I see my merchant was created with a default status of disabled.
     it 'can create a new Merchant' do
         Faker::UniqueGenerator.clear 
         merchant_1 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
