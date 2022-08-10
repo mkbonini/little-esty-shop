@@ -5,10 +5,6 @@ require 'pry'
 RSpec.describe 'Admin Merchants Index' do 
     include ActiveSupport:: Testing::TimeHelpers 
 
-    # Admin Merchants Index
-    # As an admin,
-    # When I visit the admin merchants index (/admin/merchants)
-    # Then I see the name of each merchant in the system
     it 'shows the name of each merchant in the system' do 
         Faker::UniqueGenerator.clear 
         merchant_1 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
@@ -35,11 +31,6 @@ RSpec.describe 'Admin Merchants Index' do
         end
     end
 
-    # Admin Merchant Show
-    # As an admin,
-    # When I click on the name of a merchant from the admin merchants index page,
-    # Then I am taken to that merchant's admin show page (/admin/merchants/merchant_id)
-    # And I see the name of that merchant
     it 'has links to the merchants admin show page' do 
         Faker::UniqueGenerator.clear 
         merchant_1 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
@@ -73,9 +64,6 @@ RSpec.describe 'Admin Merchants Index' do
         expect(page).to_not have_content(merchant_3.name)
     end
 
-    # As an admin,
-    # When I visit the admin merchants index
-    # Then next to each merchant name I see a button to disable or enable that merchant.
     it 'has buttons to disable or enable Merchants' do 
         Faker::UniqueGenerator.clear 
         merchant_1 = Merchant.create!(name: Faker::Name.unique.name)
@@ -120,9 +108,6 @@ RSpec.describe 'Admin Merchants Index' do
         end
     end
 
-    # When I click this button
-    # Then I am redirected back to the admin merchants index
-    # And I see that the merchant's status has changed
     it 'has buttons that changes the merchants status' do 
         Faker::UniqueGenerator.clear 
         merchant_1 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
@@ -173,11 +158,6 @@ RSpec.describe 'Admin Merchants Index' do
         end
     end
 
-    # Admin Merchants Grouped by Status
-    # As an admin,
-    # When I visit the admin merchants index
-    # Then I see two sections, one for "Enabled Merchants" and one for "Disabled Merchants"
-    # And I see that each Merchant is listed in the appropriate section
     it 'groups merchants by status' do 
         Faker::UniqueGenerator.clear 
         merchant_1 = Merchant.create!(name: Faker::Name.unique.name)
@@ -202,12 +182,6 @@ RSpec.describe 'Admin Merchants Index' do
         end
     end
 
-    # Admin Merchant Create
-    # As an admin,
-    # When I visit the admin merchants index
-    # I see a link to create a new merchant.
-    # When I click on the link,
-    # I am taken to a form that allows me to add merchant information.
     it 'has a link to create a new merchant that directs to merchant#new' do 
         Faker::UniqueGenerator.clear 
         merchant_1 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
@@ -219,11 +193,6 @@ RSpec.describe 'Admin Merchants Index' do
         expect(current_path).to eq '/admin/merchants/new'
     end
 
-    # Admin Merchants: Top 5 Merchants by Revenue
-    # As an admin,
-    # When I visit the admin merchants index
-    # Then I see the names of the top 5 merchants by total revenue generated
-    # And I see that each merchant name links to the admin merchant show page for that merchant
     it 'lists the top 5 merchants by total revenue' do 
         Faker::UniqueGenerator.clear 
 
@@ -317,11 +286,6 @@ RSpec.describe 'Admin Merchants Index' do
         expect(current_path).to eq "/admin/merchants/#{merchant_6.id}"
     end
 
-    # And I see the total revenue generated next to each merchant name
-    # Notes on Revenue Calculation:
-    # - Only invoices with at least one successful transaction should count towards revenue
-    # - Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
-    # - Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
     it 'shows total revenue next to each top merchant' do 
         Faker::UniqueGenerator.clear 
 
@@ -412,12 +376,6 @@ RSpec.describe 'Admin Merchants Index' do
         end
     end
 
-    # Admin Merchants: Top Merchant's Best Day
-    # As an admin,
-    # When I visit the admin merchants index
-    # Then next to each of the 5 merchants by revenue I see the date with the most revenue for each merchant.
-    # And I see a label “Top selling date for <merchant name> was <date with most sales>"
-    # Note: use the invoice date. If there are multiple days with equal number of sales, return the most recent day.
     it 'displays the top selling date for each top merchant' do 
         Faker::UniqueGenerator.clear 
 
