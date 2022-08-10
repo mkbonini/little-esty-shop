@@ -88,12 +88,7 @@ RSpec.describe 'Merchant invoice Show page' do
             expect(page).to have_content("packaged")
         end
     end
-    # Merchant Invoice Show Page: Total Revenue and Discounted Revenue
 
-    # As a merchant
-    # When I visit my merchant invoice show page
-    # Then I see the total revenue for my merchant from this invoice (not including discounts)
-    # And I see the total discounted revenue for my merchant from this invoice which includes bulk discounts in the calculation
     it 'shows total and discounted revenue' do
         merchant = Merchant.create!(name: 'amazon')
         customer = Customer.create!(first_name: 'Billy', last_name: 'Bob')
@@ -112,6 +107,30 @@ RSpec.describe 'Merchant invoice Show page' do
         within "#invoice-details" do
             expect(page).to have_content("Total Revenue: $12.60")
             expect(page).to have_content("Discounted Revenue: $9.92")
+        end
+    end
+
+    it 'displays discount info in item details' do
+        merchant = Merchant.create!(name: 'amazon')
+        customer = Customer.create!(first_name: 'Billy', last_name: 'Bob')
+        item_1 = Item.create!(name: 'pet rock', description: 'a rock you pet', unit_price: 10000, merchant_id: merchant.id)
+        item_2 = Item.create!(name: 'ferbie', description: 'monster toy', unit_price: 66600, merchant_id: merchant.id)
+        item_3 = Item.create!(name: 'bay blade', description: 'let it rip!', unit_price: 23400, merchant_id: merchant.id)
+        invoice_1 = Invoice.create!(status: 'completed', customer_id: customer.id)
+        discount_1 = BulkDiscount.create!(quantity: 10, discount: 0.20, merchant_id: merchant.id)
+        discount_2 = BulkDiscount.create!(quantity: 15, discount: 0.30, merchant_id: merchant.id)
+
+
+        InvoiceItem.create!(quantity: 11, unit_price: 100, status: 'shipped', item: item_1, invoice: invoice_1)
+        InvoiceItem.create!(quantity: 16, unit_price: 10, status: 'shipped', item: item_2, invoice: invoice_1)
+        InvoiceItem.create!(quantity: 5, unit_price: 10, status: 'shipped', item: item_2, invoice: invoice_1)
+
+        visit merchant_invoice_path(merchant, invoice_1)
+
+        within "#item-details" do
+            expect(page).to have_link("Discount-#{discount_1.id}")
+            expect(page).to have_link("Discount-#{discount_2.id}")
+            expect(page).to have_content("No Discount")
         end
     end
 end
